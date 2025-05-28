@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Text Analyzer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📊 Professional Document Analyzer</h1>
+            <p>Анализ TXT/DOC/DOCX файлов и текста</p>
+        </header>
+
+        <div class="grid-container">
+            <div class="card upload-section">
+                <h2>1. Загрузите файл</h2>
+                <div class="file-dropzone" id="dropZone">
+                    <input type="file" id="fileInput" accept=".txt,.doc,.docx" hidden>
+                    <label for="fileInput" class="upload-btn">Выбрать файл</label>
+                    <p>или перетащите сюда</p>
+                    <div class="file-info" id="fileInfo"></div>
+                </div>
+            </div>
+
+            <div class="card analysis-section">
+                <h2>2. Анализ содержимого</h2>
+                <textarea id="textInput" placeholder="Вставьте текст..."></textarea>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="analyzeContent()">Запустить анализ</button>
+                    <button class="btn-secondary" onclick="clearAll()">Очистить</button>
+                </div>
+            </div>
+
+            <div class="card search-section">
+                <h2>3. Поиск в тексте</h2>
+                <div class="search-box">
+                    <input type="text" id="searchQuery" placeholder="Поисковая фраза">
+                    <div class="search-options">
+                        <label>
+                            <input type="checkbox" id="caseSensitive"> Регистр
+                        </label>
+                        <button class="btn-icon" onclick="searchText()">🔍</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card results-section">
+                <h2>📈 Результаты анализа</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="charCount">0</div>
+                        <div class="stat-label">Символов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="wordCount">0</div>
+                        <div class="stat-label">Слов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="sentenceCount">0</div>
+                        <div class="stat-label">Предложений</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="searchResults">0</div>
+                        <div class="stat-label">Совпадений</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card output-section">
+            <div class="output-toolbar">
+                <span>Текст с подсветкой:</span>
+                <button class="btn-icon" onclick="exportResults()">📥 Экспорт</button>
+            </div>
+            <div id="highlightedText" class="text-output"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/mammoth@1.4.8/mammoth.browser.min.js"></script>
+    <script src="file.js"></script>
+</body>
+</html>
